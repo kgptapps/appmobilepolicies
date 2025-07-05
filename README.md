@@ -163,9 +163,9 @@ Developer assumes no responsibility for any issues, data loss, or damages arisin
 - **No manual deployment** required
 
 ### Making Changes
-1. **Edit HTML files** directly (privacy-policy.html, terms-of-service.html, etc.)
+1. **Edit HTML files** in the `/docs` folder (docs/privacy-policy.html, docs/terms-of-service.html, etc.)
 2. **Commit and push** changes to main branch
-3. **GitHub Actions** automatically deploys updates
+3. **GitHub Pages** automatically deploys updates from `/docs` folder
 4. **URLs remain the same** - no need to update app store listings
 
 ### Version Control
@@ -183,16 +183,21 @@ Developer assumes no responsibility for any issues, data loss, or damages arisin
 ## 🚀 GitHub Pages Deployment
 
 ### Deployment Status
-- **Deployed via:** GitHub Actions (enables custom domains)
+- **Deployed via:** Deploy from branch (main branch, /docs folder)
 - **Deployment URL:** https://kgptapps.github.io/appmobilepolicies/
 - **Auto-deploy:** ✅ Enabled on push to main branch
 - **HTTPS:** ✅ Automatically enabled
 - **Mobile Responsive:** ✅ Professional design for all devices
 
+### File Structure
+- **HTML files:** Located in `/docs` folder
+- **GitHub Pages:** Serves `/docs` folder as website root
+- **URLs:** Clean URLs without `/docs` in the path
+
 ### Checking Deployment
-- **Actions Tab:** View deployment history and status
-- **Pages Settings:** Configure custom domains if needed
+- **Pages Settings:** View deployment status and configure custom domains
 - **Live Site:** Test all URLs before using in app submissions
+- **Updates:** Changes to files in `/docs` folder deploy automatically
 
 ## 📞 Contact
 
