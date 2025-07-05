@@ -1,3 +1,8 @@
+---
+layout: default
+title: Support Policy
+---
+
 # Support Policy
 
 **Last Updated:** July 5, 2025

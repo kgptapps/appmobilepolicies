@@ -1,3 +1,8 @@
+---
+layout: default
+title: Disclaimer
+---
+
 # Disclaimer
 
 **Last Updated:** July 5, 2025

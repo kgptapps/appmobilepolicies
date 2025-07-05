@@ -1,0 +1,45 @@
+# GitHub Pages Configuration
+title: "Mobile App Policies - kgptapps"
+description: "Comprehensive legal policies for experimental mobile applications"
+baseurl: ""
+url: "https://kgptapps.github.io/appmobilepolicies"
+
+# Theme
+theme: minima
+
+# Markdown processor
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Navigation
+header_pages:
+  - privacy-policy.md
+  - terms-of-service.md
+  - disclaimer.md
+  - data-collection-policy.md
+  - support-policy.md
+
+# SEO and metadata
+author: kgptapps
+twitter:
+  username: kgptapps
+social:
+  name: kgptapps
+  links:
+    - https://github.com/kgptapps
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

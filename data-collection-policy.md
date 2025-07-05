@@ -1,3 +1,8 @@
+---
+layout: default
+title: Data Collection Policy
+---
+
 # Data Collection Policy
 
 **Last Updated:** July 5, 2025

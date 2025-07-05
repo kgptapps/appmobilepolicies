@@ -1,3 +1,8 @@
+---
+layout: default
+title: Terms of Service
+---
+
 # Terms of Service
 
 **Last Updated:** July 5, 2025

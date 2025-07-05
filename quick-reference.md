@@ -2,17 +2,24 @@
 
 ## Essential Policy Links for App Integration
 
-### Required Links for App Stores
+### Required Links for App Stores (GitHub Pages - Public URLs)
+```
+Privacy Policy: https://kgptapps.github.io/appmobilepolicies/privacy-policy.html
+Terms of Service: https://kgptapps.github.io/appmobilepolicies/terms-of-service.html
+```
+
+### Additional Policy Links (GitHub Pages)
+```
+Disclaimer: https://kgptapps.github.io/appmobilepolicies/disclaimer.html
+Data Collection Policy: https://kgptapps.github.io/appmobilepolicies/data-collection-policy.html
+Support Policy: https://kgptapps.github.io/appmobilepolicies/support-policy.html
+Main Page: https://kgptapps.github.io/appmobilepolicies/
+```
+
+### GitHub Repository Links (for reference)
 ```
 Privacy Policy: https://github.com/kgptapps/appmobilepolicies/blob/main/privacy-policy.md
 Terms of Service: https://github.com/kgptapps/appmobilepolicies/blob/main/terms-of-service.md
-```
-
-### Additional Policy Links
-```
-Disclaimer: https://github.com/kgptapps/appmobilepolicies/blob/main/disclaimer.md
-Data Collection Policy: https://github.com/kgptapps/appmobilepolicies/blob/main/data-collection-policy.md
-Support Policy: https://github.com/kgptapps/appmobilepolicies/blob/main/support-policy.md
 ```
 
 ## Key Phrases for App Descriptions
