@@ -104,11 +104,21 @@ jobs:
 
     - name: Deploy to docs folder
       run: |
+        # Backup static folder if it exists
+        if [ -d "docs/static" ]; then
+          cp -r docs/static /tmp/static-backup
+        fi
+
         # Remove existing docs folder if it exists
         rm -rf docs
 
         # Copy build files to docs folder
         cp -r build docs
+
+        # Restore static folder if backup exists
+        if [ -d "/tmp/static-backup" ]; then
+          cp -r /tmp/static-backup docs/static
+        fi
 
         # Configure git
         git config --local user.email "action@github.com"
