@@ -8,7 +8,7 @@ import {
 } from '@mui/icons-material';
 import { Container, Typography, Box, Paper, Tabs, Tab, AppBar, Toolbar } from '@mui/material';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -16,15 +16,27 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
+  const { appName, developerName } = useParams<{
+    appName?: string;
+    developerName?: string;
+  }>();
 
   const getCurrentTab = () => {
     if (location.pathname === '/' || location.pathname === '') return 0;
-    if (location.pathname.startsWith('/privacy-policy')) return 1;
-    if (location.pathname.startsWith('/terms-of-service')) return 2;
-    if (location.pathname.startsWith('/disclaimer')) return 3;
-    if (location.pathname.startsWith('/data-collection-policy')) return 4;
-    if (location.pathname.startsWith('/support-policy')) return 5;
+    if (location.pathname.includes('/privacy-policy')) return 1;
+    if (location.pathname.includes('/terms-of-service')) return 2;
+    if (location.pathname.includes('/disclaimer')) return 3;
+    if (location.pathname.includes('/data-collection-policy')) return 4;
+    if (location.pathname.includes('/support-policy')) return 5;
     return 0;
+  };
+
+  // Helper function to build navigation paths
+  const buildPath = (policyType: string) => {
+    if (appName && developerName) {
+      return `/${appName}/${developerName}/${policyType}`;
+    }
+    return `/${policyType}`;
   };
 
   return (
@@ -63,35 +75,35 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               icon={<SecurityIcon />}
               label="Privacy Policy"
               component={Link}
-              to="/privacy-policy"
+              to={buildPath('privacy-policy')}
               className="min-w-0 px-4"
             />
             <Tab
               icon={<GavelIcon />}
               label="Terms of Service"
               component={Link}
-              to="/terms-of-service"
+              to={buildPath('terms-of-service')}
               className="min-w-0 px-4"
             />
             <Tab
               icon={<WarningIcon />}
               label="Disclaimer"
               component={Link}
-              to="/disclaimer"
+              to={buildPath('disclaimer')}
               className="min-w-0 px-4"
             />
             <Tab
               icon={<StorageIcon />}
               label="Data Collection"
               component={Link}
-              to="/data-collection-policy"
+              to={buildPath('data-collection-policy')}
               className="min-w-0 px-4"
             />
             <Tab
               icon={<SupportIcon />}
               label="Support"
               component={Link}
-              to="/support-policy"
+              to={buildPath('support-policy')}
               className="min-w-0 px-4"
             />
           </Tabs>
