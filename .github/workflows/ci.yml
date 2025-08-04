@@ -85,29 +85,45 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
         name: build-files
         path: ./build
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
+    - name: Deploy to docs folder
+      run: |
+        # Remove existing docs folder if it exists
+        rm -rf docs
 
-    - name: Upload to GitHub Pages
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: './build'
+        # Copy build files to docs folder
+        cp -r build docs
 
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+        # Add and commit docs folder
+        git add docs
+
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "No changes to deploy"
+        else
+          git commit -m "deploy: update GitHub Pages with latest build
+
+          - Auto-deploy from GitHub Actions
+          - Updated privacy policy formatting included
+          - Build from commit ${{ github.sha }}"
+
+          # Push changes
+          git push origin main
+        fi
