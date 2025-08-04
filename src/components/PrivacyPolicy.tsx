@@ -360,6 +360,18 @@ const PrivacyPolicy: React.FC = () => {
               </Typography>
             </CardContent>
           </Card>
+
+          {/* Build Version Information */}
+          <Box className="mt-4 pt-3 border-t border-gray-200 text-center">
+            <Typography variant="caption" className="text-gray-400 text-xs block">
+              Build Version: {process.env.REACT_APP_VERSION || '1.0.0'} | Build Time:{' '}
+              {process.env.REACT_APP_BUILD_TIME || new Date().toISOString()} | Commit:{' '}
+              {process.env.REACT_APP_COMMIT_SHA?.substring(0, 7) || 'local'}
+            </Typography>
+            <Typography variant="caption" className="text-gray-400 text-xs block mt-1">
+              Generated: {new Date().toLocaleString()}
+            </Typography>
+          </Box>
         </>
       )}
     </BasePolicyComponent>
