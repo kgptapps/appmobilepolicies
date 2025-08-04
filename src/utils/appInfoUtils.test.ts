@@ -66,11 +66,20 @@ describe('appInfoUtils', () => {
       expect(result).toMatch(/https:\/\/example\.com\/[^/]+\/[^/]+\/privacy-policy/);
     });
 
-    it('should use encoded values in URL', () => {
+    it('should use encoded values in URL with query parameters', () => {
       const result = generateEncodedUrl(baseUrl, policyType, appName, developerName);
-      const parts = result.split('/');
+
+      // Split URL and query parameters
+      const [urlPart, queryPart] = result.split('?');
+      const parts = urlPart.split('/');
+
+      // Check URL structure
       expect(parts).toHaveLength(6); // protocol, empty, domain, encodedApp, encodedDev, policyType
       expect(parts[5]).toBe(policyType);
+
+      // Check query parameters
+      expect(queryPart).toContain('app=TestApp');
+      expect(queryPart).toContain('dev=TestDev');
     });
   });
 
