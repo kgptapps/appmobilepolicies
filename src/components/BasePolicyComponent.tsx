@@ -20,6 +20,13 @@ interface BasePolicyProps {
 function isLikelyReadableText(text: string): boolean {
   if (!text) return false;
 
+  // First check if it looks like base64 encoded string (URL-safe base64)
+  const isBase64Pattern = /^[A-Za-z0-9_-]+$/.test(text) && text.length > 3;
+  if (isBase64Pattern) {
+    // If it looks like base64, it's encoded, not readable text
+    return false;
+  }
+
   // Check for common patterns that suggest readable text
   const readablePatterns = [
     /\s/, // contains spaces
