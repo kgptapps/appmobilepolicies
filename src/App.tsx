@@ -41,6 +41,9 @@ function App() {
               element={<DataCollectionPolicy />}
             />
             <Route path="/:appName/:developerName/support-policy" element={<SupportPolicy />} />
+
+            {/* Catch-all route - redirect to home */}
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </Layout>
       </Router>
