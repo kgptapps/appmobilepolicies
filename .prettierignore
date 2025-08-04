@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Production builds
+build/
+dist/
+
+# Generated files
+*.min.js
+*.min.css
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Environment files
+.env*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+
+# Documentation that shouldn't be formatted
+CHANGELOG.md
+LICENSE
