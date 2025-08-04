@@ -1,4 +1,6 @@
-# Mobile App Policies - React App
+# Mobile App Policies
+
+<!-- Force GitHub Pages refresh: 2025-08-04 18:30 --> - React App
 
 This repository contains a React-based policy system for experimental mobile applications. The system allows you to generate customized legal policies by including app and developer information directly in the URL path.
 
