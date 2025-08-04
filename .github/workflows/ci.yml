@@ -104,9 +104,12 @@ jobs:
 
     - name: Deploy to docs folder
       run: |
-        # Backup static folder if it exists
+        # Backup static and policies folders if they exist
         if [ -d "docs/static" ]; then
           cp -r docs/static /tmp/static-backup
+        fi
+        if [ -d "docs/policies" ]; then
+          cp -r docs/policies /tmp/policies-backup
         fi
 
         # Remove existing docs folder if it exists
@@ -118,6 +121,11 @@ jobs:
         # Restore static folder if backup exists
         if [ -d "/tmp/static-backup" ]; then
           cp -r /tmp/static-backup docs/static
+        fi
+
+        # Restore policies folder if backup exists
+        if [ -d "/tmp/policies-backup" ]; then
+          cp -r /tmp/policies-backup docs/policies
         fi
 
         # Configure git
