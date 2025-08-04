@@ -1,64 +1,14 @@
 import { AppInfo, DEFAULT_APP_INFO } from '../types/AppInfo';
 
 /**
- * Compact encoding using character mapping and compression
+ * Simple base64 encoding for URL use (URL-safe)
  */
 function encodeValue(value: string): string {
   try {
-    // Step 1: Convert to lowercase and remove common words
-    let compressed = value
-      .toLowerCase()
-      .replace(/\b(app|mobile|the|and|of|for|inc|llc|corp|company|ltd|limited)\b/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
+    // Convert to base64 and make URL-safe
+    const base64 = btoa(value).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''); // Remove padding
 
-    // Step 2: Character mapping for common patterns
-    const charMap: { [key: string]: string } = {
-      a: '1',
-      e: '2',
-      i: '3',
-      o: '4',
-      u: '5',
-      ' ': 'x',
-      '-': 'y',
-      _: 'z',
-      th: 'q',
-      er: 'w',
-      on: 'r',
-      an: 't',
-      in: 'p',
-      ed: 's',
-      nd: 'd',
-      to: 'f',
-      en: 'g',
-      ti: 'h',
-      es: 'j',
-      or: 'k',
-      te: 'l',
-      of: 'm',
-      be: 'n',
-      he: 'b',
-      ar: 'v',
-      ou: 'c',
-    };
-
-    // Step 3: Apply character mapping (longest patterns first)
-    const sortedKeys = Object.keys(charMap).sort((a, b) => b.length - a.length);
-    for (const key of sortedKeys) {
-      compressed = compressed.replace(new RegExp(key, 'g'), charMap[key]);
-    }
-
-    // Step 4: Remove remaining vowels if still too long
-    if (compressed.length > 8) {
-      compressed = compressed.replace(/[aeiou]/g, '');
-    }
-
-    // Step 5: Truncate if still too long and add length indicator
-    if (compressed.length > 12) {
-      compressed = compressed.substring(0, 10) + compressed.length.toString(36);
-    }
-
-    return compressed || 'app';
+    return base64;
   } catch (error) {
     // Fallback: just take first letters of words
     return (
@@ -73,17 +23,41 @@ function encodeValue(value: string): string {
 }
 
 /**
+ * Decodes a base64 encoded value back to original string
+ */
+function decodeValue(encoded: string): string {
+  try {
+    // Restore base64 padding and convert back from URL-safe
+    let base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+
+    // Add padding if needed
+    while (base64.length % 4) {
+      base64 += '=';
+    }
+
+    return atob(base64);
+  } catch (error) {
+    // If decoding fails, return the encoded string
+    return encoded;
+  }
+}
+
+/**
  * Decodes and formats strings for display
  */
 export function decodeAndFormat(value: string): string {
   try {
-    // Check if this looks like an encoded value (short, contains numbers and specific chars)
-    const looksEncoded = /^[a-z0-9]{3,12}$/.test(value) && /[0-9]/.test(value);
+    // Check if this looks like a base64 encoded value (URL-safe base64 pattern)
+    const looksEncoded = /^[A-Za-z0-9_-]+$/.test(value) && value.length > 3;
 
     if (looksEncoded) {
-      // For encoded values, create a more readable representation
-      // Since we can't reliably decode back to original, we'll make it look like a code
-      return `[${value.toUpperCase()}]`;
+      // Try to decode the base64 value
+      const decoded = decodeValue(value);
+
+      // If decoding was successful and produced a reasonable result, use it
+      if (decoded !== value && decoded.length > 0 && /[a-zA-Z]/.test(decoded)) {
+        return decoded;
+      }
     }
 
     // Otherwise, treat as regular URL-encoded string
@@ -111,8 +85,8 @@ export function createAppInfo(appName?: string, developerName?: string): AppInfo
   return {
     appName: finalAppName,
     developerName: finalDeveloperName,
-    displayAppName: finalAppName, // Use original name directly
-    displayDeveloperName: finalDeveloperName, // Use original name directly
+    displayAppName: decodeAndFormat(finalAppName),
+    displayDeveloperName: decodeAndFormat(finalDeveloperName),
   };
 }
 
@@ -139,12 +113,7 @@ export function generateEncodedUrl(
   developerName: string
 ): string {
   const { encodedApp, encodedDev } = encodeForUrl(appName, developerName);
-  // Add original names as query parameters for proper decoding
-  const params = new URLSearchParams({
-    app: appName,
-    dev: developerName,
-  });
-  return `${baseUrl}/${encodedApp}/${encodedDev}/${policyType}?${params.toString()}`;
+  return `${baseUrl}/${encodedApp}/${encodedDev}/${policyType}`;
 }
 
 /**

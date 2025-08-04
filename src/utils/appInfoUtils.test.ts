@@ -37,13 +37,19 @@ describe('appInfoUtils', () => {
       expect(typeof result.encodedDev).toBe('string');
     });
 
-    it('should create shorter encoded strings', () => {
+    it('should create reversible encoded strings', () => {
       const longAppName = 'My Very Long Application Name';
       const longDevName = 'My Very Long Company Name Inc';
       const result = encodeForUrl(longAppName, longDevName);
 
-      expect(result.encodedApp.length).toBeLessThan(longAppName.length);
-      expect(result.encodedDev.length).toBeLessThan(longDevName.length);
+      // Base64 encoding creates URL-safe strings
+      expect(result.encodedApp).toMatch(/^[A-Za-z0-9_-]+$/);
+      expect(result.encodedDev).toMatch(/^[A-Za-z0-9_-]+$/);
+
+      // Should be able to decode back to original
+      const appInfo = createAppInfo(result.encodedApp, result.encodedDev);
+      expect(appInfo.displayAppName).toBe(longAppName);
+      expect(appInfo.displayDeveloperName).toBe(longDevName);
     });
 
     it('should handle empty strings', () => {
@@ -66,20 +72,17 @@ describe('appInfoUtils', () => {
       expect(result).toMatch(/https:\/\/example\.com\/[^/]+\/[^/]+\/privacy-policy/);
     });
 
-    it('should use encoded values in URL with query parameters', () => {
+    it('should use base64 encoded values in URL', () => {
       const result = generateEncodedUrl(baseUrl, policyType, appName, developerName);
-
-      // Split URL and query parameters
-      const [urlPart, queryPart] = result.split('?');
-      const parts = urlPart.split('/');
+      const parts = result.split('/');
 
       // Check URL structure
       expect(parts).toHaveLength(6); // protocol, empty, domain, encodedApp, encodedDev, policyType
       expect(parts[5]).toBe(policyType);
 
-      // Check query parameters
-      expect(queryPart).toContain('app=TestApp');
-      expect(queryPart).toContain('dev=TestDev');
+      // Check that encoded values are base64-like (URL-safe)
+      expect(parts[3]).toMatch(/^[A-Za-z0-9_-]+$/); // encodedApp
+      expect(parts[4]).toMatch(/^[A-Za-z0-9_-]+$/); // encodedDev
     });
   });
 
