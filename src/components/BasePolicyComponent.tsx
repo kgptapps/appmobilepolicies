@@ -5,7 +5,7 @@ import {
 } from '@mui/icons-material';
 import { Typography, Box, Alert, Card, CardContent, Divider, Chip } from '@mui/material';
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { AppInfo } from '../types/AppInfo';
 import { createAppInfo } from '../utils/appInfoUtils';
 
@@ -37,6 +37,7 @@ const BasePolicyComponent: React.FC<BasePolicyProps> = ({ title, children }) => 
     appName?: string;
     developerName?: string;
   }>();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // Check if user is trying to access with non-encoded URLs
@@ -53,7 +54,15 @@ const BasePolicyComponent: React.FC<BasePolicyProps> = ({ title, children }) => 
     }
   }, [appName, developerName, navigate]);
 
-  const appInfo = createAppInfo(appName, developerName);
+  // Check for original names in query parameters first (for encoded URLs)
+  const queryAppName = searchParams.get('app');
+  const queryDeveloperName = searchParams.get('dev');
+
+  // Use query parameters if available (for encoded URLs), otherwise use path parameters
+  const finalAppName = queryAppName || appName;
+  const finalDeveloperName = queryDeveloperName || developerName;
+
+  const appInfo = createAppInfo(finalAppName, finalDeveloperName);
 
   return (
     <Box>

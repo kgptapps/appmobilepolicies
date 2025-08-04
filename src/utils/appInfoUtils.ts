@@ -73,66 +73,17 @@ function encodeValue(value: string): string {
 }
 
 /**
- * Decode the encoded value back to original string (best effort)
- */
-function decodeValue(encoded: string): string {
-  try {
-    // Reverse character mapping
-    const reverseMap: { [key: string]: string } = {
-      '1': 'a',
-      '2': 'e',
-      '3': 'i',
-      '4': 'o',
-      '5': 'u',
-      x: ' ',
-      y: '-',
-      z: '_',
-      q: 'th',
-      w: 'er',
-      r: 'on',
-      t: 'an',
-      p: 'in',
-      s: 'ed',
-      d: 'nd',
-      f: 'to',
-      g: 'en',
-      h: 'ti',
-      j: 'es',
-      k: 'or',
-      l: 'te',
-      m: 'of',
-      n: 'be',
-      b: 'he',
-      v: 'ar',
-      c: 'ou',
-    };
-
-    let decoded = encoded;
-
-    // Apply reverse mapping
-    for (const [key, value] of Object.entries(reverseMap)) {
-      decoded = decoded.replace(new RegExp(key, 'g'), value);
-    }
-
-    // Capitalize first letter of each word
-    return decoded.replace(/\b\w/g, l => l.toUpperCase()).trim();
-  } catch (error) {
-    // If decoding fails, return formatted version of encoded string
-    return encoded.replace(/\b\w/g, l => l.toUpperCase());
-  }
-}
-
-/**
  * Decodes and formats strings for display
  */
 export function decodeAndFormat(value: string): string {
   try {
-    // First try to decode if it's encoded
-    const decoded = decodeValue(value);
+    // Check if this looks like an encoded value (short, contains numbers and specific chars)
+    const looksEncoded = /^[a-z0-9]{3,12}$/.test(value) && /[0-9]/.test(value);
 
-    // If decoded successfully and looks like encoded content, use it
-    if (decoded !== value && decoded.length > 0) {
-      return decoded;
+    if (looksEncoded) {
+      // For encoded values, create a more readable representation
+      // Since we can't reliably decode back to original, we'll make it look like a code
+      return `[${value.toUpperCase()}]`;
     }
 
     // Otherwise, treat as regular URL-encoded string
@@ -160,8 +111,8 @@ export function createAppInfo(appName?: string, developerName?: string): AppInfo
   return {
     appName: finalAppName,
     developerName: finalDeveloperName,
-    displayAppName: decodeAndFormat(finalAppName),
-    displayDeveloperName: decodeAndFormat(finalDeveloperName),
+    displayAppName: finalAppName, // Use original name directly
+    displayDeveloperName: finalDeveloperName, // Use original name directly
   };
 }
 
@@ -188,7 +139,12 @@ export function generateEncodedUrl(
   developerName: string
 ): string {
   const { encodedApp, encodedDev } = encodeForUrl(appName, developerName);
-  return `${baseUrl}/${encodedApp}/${encodedDev}/${policyType}`;
+  // Add original names as query parameters for proper decoding
+  const params = new URLSearchParams({
+    app: appName,
+    dev: developerName,
+  });
+  return `${baseUrl}/${encodedApp}/${encodedDev}/${policyType}?${params.toString()}`;
 }
 
 /**
