@@ -343,10 +343,9 @@ const PrivacyPolicy: React.FC = () => {
                 No Liability
               </Typography>
               <Typography variant="body1" className="font-bold">
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, {appInfo.displayDeveloperName.toUpperCase()}{' '}
-                DISCLAIMS ALL LIABILITY FOR ANY PRIVACY-RELATED ISSUES, DATA BREACHES, OR MISUSE OF
-                INFORMATION IN CONNECTION WITH THE "{appInfo.displayAppName.toUpperCase()}"
-                EXPERIMENTAL APPLICATION.
+                To the maximum extent permitted by law, {appInfo.displayDeveloperName} disclaims all
+                liability for any privacy-related issues, data breaches, or misuse of information in
+                connection with the "{appInfo.displayAppName}" experimental application.
               </Typography>
             </Box>
           </Alert>
