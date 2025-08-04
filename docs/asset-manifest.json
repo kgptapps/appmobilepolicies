@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/appmobilepolicies/static/css/main.8d2bb677.css",
-    "main.js": "/appmobilepolicies/static/js/main.0f66fc7a.js",
+    "main.js": "/appmobilepolicies/static/js/main.6704f1bf.js",
     "index.html": "/appmobilepolicies/index.html",
     "main.8d2bb677.css.map": "/appmobilepolicies/static/css/main.8d2bb677.css.map",
-    "main.0f66fc7a.js.map": "/appmobilepolicies/static/js/main.0f66fc7a.js.map"
+    "main.6704f1bf.js.map": "/appmobilepolicies/static/js/main.6704f1bf.js.map"
   },
   "entrypoints": [
     "static/css/main.8d2bb677.css",
-    "static/js/main.0f66fc7a.js"
+    "static/js/main.6704f1bf.js"
   ]
 }
