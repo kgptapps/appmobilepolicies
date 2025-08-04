@@ -130,3 +130,19 @@ jobs:
           # Push changes
           git push origin main
         fi
+
+    - name: Trigger GitHub Pages deployment
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // Trigger a Pages deployment by making a request to the Pages API
+          try {
+            await github.rest.repos.requestPagesBuild({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log('✅ GitHub Pages deployment triggered successfully');
+          } catch (error) {
+            console.log('⚠️ Could not trigger Pages deployment:', error.message);
+            // Don't fail the workflow if this fails
+          }
