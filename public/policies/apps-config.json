@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "appName": "RateShare",
+      "developerName": "Kannaiyan",
+      "appNameEncoded": "UmF0ZVNoYXJl",
+      "developerNameEncoded": "S2FubmFpeWFu",
+      "description": "A mobile application for sharing and rating content",
+      "category": "Social",
+      "policies": [
+        "privacy-policy",
+        "terms-of-service",
+        "cookie-policy",
+        "data-deletion"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-08-04",
+    "generator": "Mobile App Policies Generator",
+    "baseUrl": "https://kgptapps.github.io/appmobilepolicies/policies"
+  }
+}
