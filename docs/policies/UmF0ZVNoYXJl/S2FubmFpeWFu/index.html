@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Policies - RateShare by Kannaiyan</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 30px;
+            margin: -40px -40px 30px -40px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .subtitle {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .app-info {
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            border-left: 4px solid #3b82f6;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .app-info h3 {
+            margin: 0 0 12px 0;
+            color: #1e40af;
+        }
+        .chip {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.875em;
+            font-weight: 500;
+            margin: 0 8px 0 0;
+        }
+        .policies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .policy-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .policy-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+        .policy-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .policy-title {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: #1e40af;
+            margin: 0 0 8px 0;
+        }
+        .policy-description {
+            color: #6b7280;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.875em;
+        }
+        .build-info {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 0.75em;
+            color: #9ca3af;
+        }
+        @media (max-width: 640px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            .header { margin: -20px -20px 20px -20px; padding: 20px; }
+            h1 { font-size: 2em; }
+            .policies-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Legal Policies</h1>
+            <div class="subtitle">Static policy documents for mobile applications</div>
+        </div>
+
+        <div class="app-info">
+            <h3>📱 Application Information</h3>
+            <div><strong>Application:</strong> <span class="chip">RateShare</span></div>
+            <div style="margin-top: 8px;"><strong>Developer:</strong> <span class="chip">Kannaiyan</span></div>
+            <div style="margin-top: 8px;"><strong>Category:</strong> <span class="chip">Social</span></div>
+        </div>
+
+        <div class="policies-grid">
+            <a href="privacy-policy.html" class="policy-card">
+                <span class="policy-icon">🔒</span>
+                <h3 class="policy-title">Privacy Policy</h3>
+                <p class="policy-description">
+                    Comprehensive privacy policy explaining data collection, usage, and protection practices for the mobile application.
+                </p>
+            </a>
+
+            <a href="terms-of-service.html" class="policy-card">
+                <span class="policy-icon">📋</span>
+                <h3 class="policy-title">Terms of Service</h3>
+                <p class="policy-description">
+                    Legal terms and conditions governing the use of the application, including user responsibilities and limitations.
+                </p>
+            </a>
+
+            <a href="cookie-policy.html" class="policy-card">
+                <span class="policy-icon">🍪</span>
+                <h3 class="policy-title">Cookie Policy</h3>
+                <p class="policy-description">
+                    Information about cookies and tracking technologies used in web-based components of the application.
+                </p>
+            </a>
+
+            <a href="data-deletion.html" class="policy-card">
+                <span class="policy-icon">🗑️</span>
+                <h3 class="policy-title">Data Deletion</h3>
+                <p class="policy-description">
+                    Procedures and instructions for requesting deletion of personal data and app-related information.
+                </p>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>These policies are generated for static access and Android Play Console compliance.</p>
+            <p>For the most up-to-date versions, please visit the dynamic policy URLs.</p>
+        </div>
+
+        <div class="build-info">
+            <div>Static Policy Index for RateShare by Kannaiyan</div>
+            <div>Generated: <span id="generated-date"></span></div>
+        </div>
+    </div>
+
+    <script>
+        // Set current date
+        const now = new Date();
+        const dateTimeString = now.toLocaleString();
+        document.getElementById('generated-date').textContent = dateTimeString;
+    </script>
+</body>
+</html>
